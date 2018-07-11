@@ -1,0 +1,12 @@
+language: go
+go:
+  - "1.10"
+cache:
+  directories:
+    - $GOPATH/pkg/dep
+install:
+  - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+  - dep ensure
+script:
+  - go test ./...
+  - go build ./...
