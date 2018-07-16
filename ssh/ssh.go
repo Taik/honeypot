@@ -3,7 +3,6 @@ package ssh
 import (
 	"crypto/rand"
 	"crypto/rsa"
-	"log"
 	"net"
 
 	"github.com/pkg/errors"
@@ -66,8 +65,7 @@ func (s *Server) Start() error {
 	for {
 		c, err := s.listener.Accept()
 		if err != nil {
-			log.Printf("unable to accept incoming connection: %s\n", err)
-			continue
+			return errors.Wrap(err, "ssh: unable to accept incoming connection")
 		}
 
 		go func(conn net.Conn) {
